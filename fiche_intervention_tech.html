@@ -1,156 +1,268 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiche d'Intervention Technique</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <style>
-        /* Reset pour le PDF */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f4f9; padding: 0; color: #333; }
-        
-        /* Format A4 optimisé */
-        .container { 
-            width: 210mm; 
-            min-height: 297mm; 
-            margin: auto; 
-            background: white; 
-            padding: 15mm 20mm; /* Marges internes équilibrées */
-            position: relative;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche d'Intervention Technique</title>
 
-        header { 
-            text-align: center; 
-            border-bottom: 3px solid #3498db; 
-            margin-bottom: 20px; 
-            padding-bottom: 10px; 
-        }
-        
-        h1 { margin: 0; color: #2c3e50; text-transform: uppercase; font-size: 22px; }
-        p.subtitle { margin-top: 5px; font-style: italic; color: #7f8c8d; }
-        
-        h2 { background: #3498db; color: white; padding: 8px; font-size: 15px; border-radius: 4px; margin-top: 20px; text-transform: uppercase; }
-        
-        .grid-form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
-        .field { display: flex; flex-direction: column; margin-bottom: 5px; }
-        label { font-weight: bold; margin-bottom: 3px; font-size: 13px; color: #555; }
-        
-        input {
-            padding: 8px; border: 1px solid #bdc3c7; border-radius: 4px; font-size: 14px; width: 100%;
-        }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-        .checkbox-group { display: flex; align-items: center; gap: 15px; padding: 5px 0; }
-        .checkbox-item { display: flex; align-items: center; gap: 5px; font-size: 14px; }
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f9;
+    padding: 20px;
+}
 
-        /* Liste des caméras réintégrée au complet */
-        .camera-list { list-style: none; padding: 0; margin-top: 10px; }
-        .camera-list li { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .camera-list label { width: 80px; margin: 0; flex-shrink: 0; font-size: 13px; }
+.container {
+    width: 210mm;              /* Largeur exacte A4 */
+    min-height: 297mm;
+    margin: auto;
+    background: white;
+    padding: 15mm;
+    box-sizing: border-box;
+}
 
-        .btn-container { text-align: center; padding: 20px 0; background: #f4f4f9; }
-        button {
-            background: #27ae60; color: white; border: none; padding: 15px 30px;
-            font-size: 16px; border-radius: 5px; cursor: pointer; font-weight: bold;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        button:hover { background: #219150; }
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 8px;
+    font-size: 22px;
+}
 
-        /* Empêche les coupures de page */
-        #intervention-form { page-break-inside: avoid; }
-    </style>
+h2 {
+    background: #3498db;
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.grid-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 4px;
+    font-size: 13px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.checkbox-group {
+    display: flex;
+    gap: 10px;
+}
+
+.camera-list {
+    list-style: none;
+    padding: 0;
+}
+
+.camera-list li {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.camera-list label {
+    width: 90px;
+}
+
+.camera-list input {
+    flex: 1;
+}
+
+table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+td {
+    padding: 6px 4px;
+}
+
+.btn-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Spécial PDF */
+@media print {
+    body {
+        padding: 0;
+        background: white;
+    }
+    .btn-container {
+        display: none;
+    }
+    .container {
+        width: 100%;
+        min-height: auto;
+        padding: 10mm;
+    }
+}
+</style>
 </head>
+
 <body>
 
 <div class="container" id="intervention-form">
-    <header>
-        <h1>FICHE D'INTERVENTION TECHNIQUE</h1> [cite: 17]
-        <p class="subtitle">Système de vidéosurveillance</p>
-    </header>
 
-    <h2>1. Informations Client</h2> [cite: 18]
-    <div class="grid-form">
-        <div class="field">
-            <label>Nom Prénom :</label> [cite: 19]
-            <input type="text" value="Bryan"> [cite: 20]
-        </div>
-        <div class="field">
-            <label>Téléphone :</label> [cite: 21]
-            <input type="tel" value="0693620215"> [cite: 21]
-        </div>
-        <div class="field" style="grid-column: span 2;">
-            <label>Adresse d'intervention :</label> [cite: 22]
-            <input type="text" value="4 cité des marguerites"> [cite: 23]
-        </div>
-        <div class="field" style="grid-column: span 2;">
-            <label>Email :</label> [cite: 24]
-            <input type="email" value="bryanfolio530@gmail.com"> [cite: 25]
-        </div>
-    </div>
+<h1>FICHE D'INTERVENTION TECHNIQUE</h1>
+<p style="text-align:center;font-style:italic;">Système de vidéosurveillance</p>
 
-    <h2>2. Installation Vidéosurveillance</h2> [cite: 26]
-    <div class="grid-form">
-        <div class="field">
-            <label>Nombre de caméras :</label> [cite: 28]
-            <input type="text" placeholder="Ex: 4"> [cite: 27]
-        </div>
-        <div class="field">
-            <label>Technologie :</label> [cite: 30]
-            <div class="checkbox-group">
-                <div class="checkbox-item"><input type="checkbox"> HDCVI</div> [cite: 29]
-                <div class="checkbox-item"><input type="checkbox"> IP</div> [cite: 29]
-            </div>
-        </div>
-    </div>
-    
-    <label style="display:block; margin-top:15px; font-weight:bold; font-size: 13px;">Emplacements :</label>
-    <ul class="camera-list">
-        <li><label>Cam 1 :</label> <input type="text" style="flex:1;"></li> [cite: 31]
-        <li><label>Cam 2 :</label> <input type="text" style="flex:1;"></li> [cite: 32]
-        <li><label>Cam 3 :</label> <input type="text" style="flex:1;"></li>
-        <li><label>Cam 4 :</label> <input type="text" style="flex:1;"></li>
-    </ul>
+<h2>1. INFORMATIONS CLIENT</h2>
 
-    <div class="field" style="margin-top: 25px;">
-        <label>Date d'intervention prévue :</label> [cite: 33]
-        <input type="date" style="width: 200px;">
-    </div>
+<div class="grid-form">
+<div class="field">
+<label>Nom Prénom :</label>
+<input type="text">
+</div>
+
+<div class="field">
+<label>Téléphone :</label>
+<input type="tel">
+</div>
+
+<div class="field" style="grid-column: span 2;">
+<label>Adresse d'intervention :</label>
+<input type="text">
+</div>
+
+<div class="field" style="grid-column: span 2;">
+<label>Email :</label>
+<input type="email">
+</div>
+</div>
+
+<h2>2. INSTALLATION VIDÉOSURVEILLANCE</h2>
+
+<div class="grid-form">
+<div class="field">
+<label>Nombre de caméras :</label>
+<input type="text">
+</div>
+
+<div class="field">
+<label>Type :</label>
+<div class="checkbox-group">
+<label><input type="checkbox"> HDCVI</label>
+<label><input type="checkbox"> IP</label>
+</div>
+</div>
+</div>
+
+<label style="margin-top:15px;display:block;font-weight:bold;">Emplacements :</label>
+
+<ul class="camera-list">
+<li><label>Caméra 1 :</label><input type="text"></li>
+<li><label>Caméra 2 :</label><input type="text"></li>
+<li><label>Caméra 3 :</label><input type="text"></li>
+<li><label>Caméra 4 :</label><input type="text"></li>
+</ul>
+
+<h2>3. MATÉRIEL À PRÉVOIR</h2>
+
+<div class="grid-form">
+<div class="field">
+<label>Câblage :</label>
+<input type="text">
+</div>
+
+<div class="field">
+<label>Carte SD :</label>
+<div class="checkbox-group">
+<label><input type="checkbox"> 64GB</label>
+<label><input type="checkbox"> 128GB</label>
+</div>
+</div>
+</div>
+
+<table>
+<tr>
+<td><strong>Vis bois :</strong></td>
+<td><input type="radio" name="vis_bois"> Oui <input type="radio" name="vis_bois"> Non</td>
+<td><strong>Vis placo :</strong></td>
+<td><input type="radio" name="vis_placo"> Oui <input type="radio" name="vis_placo"> Non</td>
+</tr>
+
+<tr>
+<td><strong>Vis tôle :</strong></td>
+<td><input type="radio" name="vis_tole"> Oui <input type="radio" name="vis_tole"> Non</td>
+<td><strong>Vis béton :</strong></td>
+<td><input type="radio" name="vis_beton"> Oui <input type="radio" name="vis_beton"> Non</td>
+</tr>
+</table>
+
+<div class="field" style="margin-top:15px;">
+<label>Date prévisionnelle :</label>
+<input type="date" style="width:200px;">
+</div>
+
 </div>
 
 <div class="btn-container">
-    <button onclick="generatePDF()">Télécharger le PDF (4 Caméras)</button>
+<button onclick="generatePDF()">Générer le PDF</button>
 </div>
 
 <script>
-    function generatePDF() {
-        const element = document.getElementById('intervention-form');
-        
-        // On s'assure que les valeurs saisies sont bien capturées
-        const inputs = element.querySelectorAll('input');
-        inputs.forEach(input => {
-            if(input.type === 'checkbox' || input.type === 'radio') {
-                if(input.checked) input.setAttribute('checked', 'checked');
-                else input.removeAttribute('checked');
-            } else {
-                input.setAttribute('value', input.value);
-            }
-        });
+function generatePDF() {
 
-        const opt = {
-            margin: 0,
-            filename: 'Fiche_Intervention_Bryan.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { 
-                scale: 2, 
-                useCORS: true,
-                scrollY: 0
-            },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
+const element = document.getElementById('intervention-form');
 
-        html2pdf().set(opt).from(element).save();
-    }
+const opt = {
+    margin: 0,
+    filename: 'Fiche_Intervention.pdf',
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: { 
+        scale: 3,
+        useCORS: true,
+        scrollY: 0
+    },
+    jsPDF: { 
+        unit: 'mm',
+        format: 'a4',
+        orientation: 'portrait'
+    },
+    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+};
+
+html2pdf().set(opt).from(element).save();
+}
 </script>
 
 </body>
