@@ -6,54 +6,62 @@
     <title>Fiche d'Intervention Technique</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f4f9; padding: 20px; color: #333; }
-        .container { max-width: 850px; margin: auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        /* Reset pour éviter les espaces blancs en haut du PDF */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        header { text-align: center; border-bottom: 3px solid #3498db; margin-bottom: 20px; padding-bottom: 10px; }
-        h1 { margin: 0; color: #2c3e50; text-transform: uppercase; font-size: 24px; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f4f9; padding: 0; color: #333; }
         
-        h2 { background: #3498db; color: white; padding: 10px; font-size: 16px; border-radius: 4px; margin-top: 25px; text-transform: uppercase; }
+        /* Container ajusté pour le format A4 */
+        .container { 
+            width: 210mm; /* Largeur A4 */
+            min-height: 297mm; 
+            margin: auto; 
+            background: white; 
+            padding: 20mm; 
+            position: relative;
+        }
+
+        header { 
+            text-align: center; 
+            border-bottom: 3px solid #3498db; 
+            margin-bottom: 20px; 
+            padding-bottom: 10px; 
+        }
+        
+        h1 { margin: 0; color: #2c3e50; text-transform: uppercase; font-size: 22px; }
+        
+        h2 { background: #3498db; color: white; padding: 8px; font-size: 15px; border-radius: 4px; margin-top: 20px; text-transform: uppercase; }
         
         .grid-form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
         .field { display: flex; flex-direction: column; margin-bottom: 5px; }
         label { font-weight: bold; margin-bottom: 3px; font-size: 13px; color: #555; }
         
-        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select {
-            padding: 10px; border: 1px solid #bdc3c7; border-radius: 4px; font-size: 14px; width: 100%; box-sizing: border-box;
+        input {
+            padding: 8px; border: 1px solid #bdc3c7; border-radius: 4px; font-size: 14px; width: 100%;
         }
 
         .checkbox-group { display: flex; align-items: center; gap: 15px; padding: 5px 0; }
         .checkbox-item { display: flex; align-items: center; gap: 5px; font-size: 14px; }
-        
-        /* Correction visuelle pour les PDF */
-        input[type="checkbox"], input[type="radio"] {
-            transform: scale(1.2);
-            cursor: pointer;
-        }
 
         .camera-list { list-style: none; padding: 0; margin-top: 10px; }
         .camera-list li { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
         .camera-list label { width: 80px; margin: 0; flex-shrink: 0; }
 
-        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
-        table td { padding: 8px; border-bottom: 1px solid #eee; }
-
-        .btn-container { text-align: center; margin-top: 40px; }
+        .btn-container { text-align: center; padding: 20px 0; background: #f4f4f9; }
         button {
             background: #27ae60; color: white; border: none; padding: 15px 30px;
             font-size: 16px; border-radius: 5px; cursor: pointer; font-weight: bold;
         }
-        button:hover { background: #219150; }
 
-        /* Optimisation PDF */
-        .pdf-only { display: none; }
+        /* Empêche le découpage du contenu sur deux pages */
+        #intervention-form { page-break-inside: avoid; }
     </style>
 </head>
 <body>
 
 <div class="container" id="intervention-form">
     <header>
-        <h1>Fiche d'Intervention Technique</h1>
+        <h1>FICHE D'INTERVENTION TECHNIQUE</h1>
         <p style="margin-top: 5px; font-style: italic;">Système de vidéosurveillance</p>
     </header>
 
@@ -61,19 +69,19 @@
     <div class="grid-form">
         <div class="field">
             <label>Nom Prénom :</label>
-            <input type="text" id="nom" placeholder="Ex: Jean Dupont">
+            <input type="text" value="Bryan">
         </div>
         <div class="field">
             <label>Téléphone :</label>
-            <input type="tel" id="tel" placeholder="06 00 00 00 00">
+            <input type="tel" value="0693620215">
         </div>
         <div class="field" style="grid-column: span 2;">
             <label>Adresse d'intervention :</label>
-            <input type="text" id="adresse" placeholder="Adresse complète">
+            <input type="text" value="4 cité des marguerites">
         </div>
         <div class="field" style="grid-column: span 2;">
             <label>Email :</label>
-            <input type="email" id="email" placeholder="client@exemple.com">
+            <input type="email" value="bryanfolio530@gmail.com">
         </div>
     </div>
 
@@ -92,88 +100,37 @@
         </div>
     </div>
     
-    <label style="display:block; margin-top:15px; font-weight:bold; font-size: 14px;">Emplacements des caméras :</label>
     <ul class="camera-list">
         <li><label>Cam 1 :</label> <input type="text" style="flex:1;"></li>
         <li><label>Cam 2 :</label> <input type="text" style="flex:1;"></li>
-        <li><label>Cam 3 :</label> <input type="text" style="flex:1;"></li>
-        <li><label>Cam 4 :</label> <input type="text" style="flex:1;"></li>
     </ul>
-
-    <h2>3. Matériel & Spécifications</h2>
-    <div class="grid-form">
-        <div class="field">
-            <label>Câblage (mètres approx.) :</label>
-            <input type="text" placeholder="Ex: 50m">
-        </div>
-        <div class="field">
-            <label>Stockage :</label>
-            <div class="checkbox-group">
-                <div class="checkbox-item"><input type="checkbox"> 64GB</div>
-                <div class="checkbox-item"><input type="checkbox"> 128GB</div>
-            </div>
-        </div>
-    </div>
-
-    <table>
-        <tr>
-            <td><strong>Vis bois :</strong></td>
-            <td><input type="radio" name="vis_bois"> Oui <input type="radio" name="vis_bois"> Non</td>
-            <td><strong>Vis placo :</strong></td>
-            <td><input type="radio" name="vis_placo"> Oui <input type="radio" name="vis_placo"> Non</td>
-        </tr>
-        <tr>
-            <td><strong>Vis tôle :</strong></td>
-            <td><input type="radio" name="vis_tole"> Oui <input type="radio" name="vis_tole"> Non</td>
-            <td><strong>Vis béton :</strong></td>
-            <td><input type="radio" name="vis_beton"> Oui <input type="radio" name="vis_beton"> Non</td>
-        </tr>
-    </table>
 
     <div class="field" style="margin-top: 25px;">
         <label>Date d'intervention prévue :</label>
-        <input type="date" style="width: 250px;">
+        <input type="date" style="width: 200px;">
     </div>
 </div>
 
 <div class="btn-container">
-    <button onclick="generatePDF()">Générer le PDF final</button>
+    <button onclick="generatePDF()">Télécharger le PDF Propre</button>
 </div>
 
 <script>
     function generatePDF() {
         const element = document.getElementById('intervention-form');
         
-        // --- ASTUCE : Capturer les valeurs actuelles avant génération ---
-        // html2pdf ne capture pas toujours les valeurs tapées dans les inputs.
-        const inputs = element.querySelectorAll('input[type="text"], input[type="email"], input[type="tel"], input[type="date"]');
-        inputs.forEach(input => {
-            input.setAttribute('value', input.value);
-        });
-
-        // Pour les checkbox et radios
-        const checks = element.querySelectorAll('input[type="checkbox"], input[type="radio"]');
-        checks.forEach(check => {
-            if (check.checked) {
-                check.setAttribute('checked', 'checked');
-            } else {
-                check.removeAttribute('checked');
-            }
-        });
-
         const opt = {
-            margin:       [10, 10],
-            filename:     'Fiche_Intervention.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
+            margin:       0, // On gère les marges via le CSS du container
+            filename:     'Fiche_Intervention_Correcte.pdf',
+            image:        { type: 'jpeg', quality: 1 },
             html2canvas:  { 
-                scale: 3, // Augmente la résolution
-                letterRendering: true,
-                useCORS: true 
+                scale: 2, 
+                useCORS: true,
+                scrollY: 0 // Force la capture au sommet de l'élément
             },
             jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
-        // Lancer la création avec gestion de la promesse pour éviter les bugs
         html2pdf().set(opt).from(element).save();
     }
 </script>
