@@ -15,8 +15,7 @@ body {
 }
 
 .container {
-    width: 210mm;              /* Largeur exacte A4 */
-    min-height: 297mm;
+    width: 190mm; /* réduit pour éviter débordement */
     margin: auto;
     background: white;
     padding: 15mm;
@@ -120,7 +119,7 @@ button {
     cursor: pointer;
 }
 
-/* Spécial PDF */
+/* Version impression */
 @media print {
     body {
         padding: 0;
@@ -131,7 +130,6 @@ button {
     }
     .container {
         width: 100%;
-        min-height: auto;
         padding: 10mm;
     }
 }
@@ -245,12 +243,11 @@ function generatePDF() {
 const element = document.getElementById('intervention-form');
 
 const opt = {
-    margin: 0,
+    margin: [10, 10, 10, 10],
     filename: 'Fiche_Intervention.pdf',
-    image: { type: 'jpeg', quality: 1 },
+    image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { 
-        scale: 3,
-        useCORS: true,
+        scale: 2,
         scrollY: 0
     },
     jsPDF: { 
@@ -258,7 +255,7 @@ const opt = {
         format: 'a4',
         orientation: 'portrait'
     },
-    pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    pagebreak: { mode: ['css'] }
 };
 
 html2pdf().set(opt).from(element).save();
