@@ -6,18 +6,18 @@
     <title>Fiche d'Intervention Technique</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
-        /* Reset pour éviter les espaces blancs en haut du PDF */
+        /* Reset pour le PDF */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f4f9; padding: 0; color: #333; }
         
-        /* Container ajusté pour le format A4 */
+        /* Format A4 optimisé */
         .container { 
-            width: 210mm; /* Largeur A4 */
+            width: 210mm; 
             min-height: 297mm; 
             margin: auto; 
             background: white; 
-            padding: 20mm; 
+            padding: 15mm 20mm; /* Marges internes équilibrées */
             position: relative;
         }
 
@@ -29,6 +29,7 @@
         }
         
         h1 { margin: 0; color: #2c3e50; text-transform: uppercase; font-size: 22px; }
+        p.subtitle { margin-top: 5px; font-style: italic; color: #7f8c8d; }
         
         h2 { background: #3498db; color: white; padding: 8px; font-size: 15px; border-radius: 4px; margin-top: 20px; text-transform: uppercase; }
         
@@ -43,17 +44,20 @@
         .checkbox-group { display: flex; align-items: center; gap: 15px; padding: 5px 0; }
         .checkbox-item { display: flex; align-items: center; gap: 5px; font-size: 14px; }
 
+        /* Liste des caméras réintégrée au complet */
         .camera-list { list-style: none; padding: 0; margin-top: 10px; }
         .camera-list li { margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-        .camera-list label { width: 80px; margin: 0; flex-shrink: 0; }
+        .camera-list label { width: 80px; margin: 0; flex-shrink: 0; font-size: 13px; }
 
         .btn-container { text-align: center; padding: 20px 0; background: #f4f4f9; }
         button {
             background: #27ae60; color: white; border: none; padding: 15px 30px;
             font-size: 16px; border-radius: 5px; cursor: pointer; font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
+        button:hover { background: #219150; }
 
-        /* Empêche le découpage du contenu sur deux pages */
+        /* Empêche les coupures de page */
         #intervention-form { page-break-inside: avoid; }
     </style>
 </head>
@@ -61,74 +65,88 @@
 
 <div class="container" id="intervention-form">
     <header>
-        <h1>FICHE D'INTERVENTION TECHNIQUE</h1>
-        <p style="margin-top: 5px; font-style: italic;">Système de vidéosurveillance</p>
+        <h1>FICHE D'INTERVENTION TECHNIQUE</h1> [cite: 17]
+        <p class="subtitle">Système de vidéosurveillance</p>
     </header>
 
-    <h2>1. Informations Client</h2>
+    <h2>1. Informations Client</h2> [cite: 18]
     <div class="grid-form">
         <div class="field">
-            <label>Nom Prénom :</label>
-            <input type="text" value="Bryan">
+            <label>Nom Prénom :</label> [cite: 19]
+            <input type="text" value="Bryan"> [cite: 20]
         </div>
         <div class="field">
-            <label>Téléphone :</label>
-            <input type="tel" value="0693620215">
+            <label>Téléphone :</label> [cite: 21]
+            <input type="tel" value="0693620215"> [cite: 21]
         </div>
         <div class="field" style="grid-column: span 2;">
-            <label>Adresse d'intervention :</label>
-            <input type="text" value="4 cité des marguerites">
+            <label>Adresse d'intervention :</label> [cite: 22]
+            <input type="text" value="4 cité des marguerites"> [cite: 23]
         </div>
         <div class="field" style="grid-column: span 2;">
-            <label>Email :</label>
-            <input type="email" value="bryanfolio530@gmail.com">
+            <label>Email :</label> [cite: 24]
+            <input type="email" value="bryanfolio530@gmail.com"> [cite: 25]
         </div>
     </div>
 
-    <h2>2. Installation Vidéosurveillance</h2>
+    <h2>2. Installation Vidéosurveillance</h2> [cite: 26]
     <div class="grid-form">
         <div class="field">
-            <label>Nombre de caméras :</label>
-            <input type="text" placeholder="Ex: 4">
+            <label>Nombre de caméras :</label> [cite: 28]
+            <input type="text" placeholder="Ex: 4"> [cite: 27]
         </div>
         <div class="field">
-            <label>Technologie :</label>
+            <label>Technologie :</label> [cite: 30]
             <div class="checkbox-group">
-                <div class="checkbox-item"><input type="checkbox"> HDCVI</div>
-                <div class="checkbox-item"><input type="checkbox"> IP</div>
+                <div class="checkbox-item"><input type="checkbox"> HDCVI</div> [cite: 29]
+                <div class="checkbox-item"><input type="checkbox"> IP</div> [cite: 29]
             </div>
         </div>
     </div>
     
+    <label style="display:block; margin-top:15px; font-weight:bold; font-size: 13px;">Emplacements :</label>
     <ul class="camera-list">
-        <li><label>Cam 1 :</label> <input type="text" style="flex:1;"></li>
-        <li><label>Cam 2 :</label> <input type="text" style="flex:1;"></li>
+        <li><label>Cam 1 :</label> <input type="text" style="flex:1;"></li> [cite: 31]
+        <li><label>Cam 2 :</label> <input type="text" style="flex:1;"></li> [cite: 32]
+        <li><label>Cam 3 :</label> <input type="text" style="flex:1;"></li>
+        <li><label>Cam 4 :</label> <input type="text" style="flex:1;"></li>
     </ul>
 
     <div class="field" style="margin-top: 25px;">
-        <label>Date d'intervention prévue :</label>
+        <label>Date d'intervention prévue :</label> [cite: 33]
         <input type="date" style="width: 200px;">
     </div>
 </div>
 
 <div class="btn-container">
-    <button onclick="generatePDF()">Télécharger le PDF Propre</button>
+    <button onclick="generatePDF()">Télécharger le PDF (4 Caméras)</button>
 </div>
 
 <script>
     function generatePDF() {
         const element = document.getElementById('intervention-form');
         
+        // On s'assure que les valeurs saisies sont bien capturées
+        const inputs = element.querySelectorAll('input');
+        inputs.forEach(input => {
+            if(input.type === 'checkbox' || input.type === 'radio') {
+                if(input.checked) input.setAttribute('checked', 'checked');
+                else input.removeAttribute('checked');
+            } else {
+                input.setAttribute('value', input.value);
+            }
+        });
+
         const opt = {
-            margin:       0, // On gère les marges via le CSS du container
-            filename:     'Fiche_Intervention_Correcte.pdf',
-            image:        { type: 'jpeg', quality: 1 },
-            html2canvas:  { 
+            margin: 0,
+            filename: 'Fiche_Intervention_Bryan.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
                 scale: 2, 
                 useCORS: true,
-                scrollY: 0 // Force la capture au sommet de l'élément
+                scrollY: 0
             },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
         html2pdf().set(opt).from(element).save();
