@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fiche d'Intervention Technique</title>
+<title>Fiche d'Intervention Technique - Portail</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
@@ -15,7 +15,7 @@ body {
 }
 
 .container {
-    width: 190mm; /* réduit pour éviter débordement */
+    width: 190mm;
     margin: auto;
     background: white;
     padding: 15mm;
@@ -60,7 +60,8 @@ label {
 input[type="text"],
 input[type="email"],
 input[type="tel"],
-input[type="date"] {
+input[type="date"],
+textarea {
     padding: 6px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -69,28 +70,14 @@ input[type="date"] {
     box-sizing: border-box;
 }
 
+textarea {
+    resize: none;
+}
+
 .checkbox-group {
     display: flex;
     gap: 10px;
-}
-
-.camera-list {
-    list-style: none;
-    padding: 0;
-}
-
-.camera-list li {
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-}
-
-.camera-list label {
-    width: 90px;
-}
-
-.camera-list input {
-    flex: 1;
+    flex-wrap: wrap;
 }
 
 table {
@@ -119,7 +106,6 @@ button {
     cursor: pointer;
 }
 
-/* Version impression */
 @media print {
     body {
         padding: 0;
@@ -141,7 +127,7 @@ button {
 <div class="container" id="intervention-form">
 
 <h1>FICHE D'INTERVENTION TECHNIQUE</h1>
-<p style="text-align:center;font-style:italic;">Système de vidéosurveillance</p>
+<p style="text-align:center;font-style:italic;">Portail & Automatisme</p>
 
 <h2>1. INFORMATIONS CLIENT</h2>
 
@@ -167,67 +153,132 @@ button {
 </div>
 </div>
 
-<h2>2. INSTALLATION VIDÉOSURVEILLANCE</h2>
+<h2>2. INSTALLATION PORTAIL</h2>
 
 <div class="grid-form">
+
 <div class="field">
-<label>Nombre de caméras :</label>
+<label>Type de portail :</label>
+<div class="checkbox-group">
+<label><input type="checkbox"> Coulissant</label>
+<label><input type="checkbox"> Coulissant + portillon intégré</label>
+<label><input type="checkbox"> Battant</label>
+</div>
+</div>
+
+<div class="field">
+<label>Dimensions :</label>
 <input type="text">
 </div>
 
 <div class="field">
-<label>Type :</label>
+<label>Rail déjà en place :</label>
 <div class="checkbox-group">
-<label><input type="checkbox"> HDCVI</label>
-<label><input type="checkbox"> IP</label>
-</div>
+<label><input type="radio" name="rail"> Oui</label>
+<label><input type="radio" name="rail"> Non</label>
 </div>
 </div>
 
-<label style="margin-top:15px;display:block;font-weight:bold;">Emplacements :</label>
+<div class="field">
+<label>Rattrapage béton :</label>
+<div class="checkbox-group">
+<label><input type="radio" name="beton"> Oui</label>
+<label><input type="radio" name="beton"> Non</label>
+</div>
+</div>
 
-<ul class="camera-list">
-<li><label>Caméra 1 :</label><input type="text"></li>
-<li><label>Caméra 2 :</label><input type="text"></li>
-<li><label>Caméra 3 :</label><input type="text"></li>
-<li><label>Caméra 4 :</label><input type="text"></li>
-</ul>
+<div class="field">
+<label>BXV :</label>
+<div class="checkbox-group">
+<label><input type="checkbox"> 400</label>
+<label><input type="checkbox"> 600</label>
+<label><input type="checkbox"> 1000</label>
+</div>
+</div>
+
+<div class="field">
+<label>Moteur en hauteur :</label>
+<div class="checkbox-group">
+<label><input type="radio" name="moteur"> Oui</label>
+<label><input type="radio" name="moteur"> Non</label>
+</div>
+</div>
+
+<div class="field">
+<label>Traversée chaussée :</label>
+<div class="checkbox-group">
+<label><input type="radio" name="chaussee"> Oui</label>
+<label><input type="radio" name="chaussee"> Non</label>
+</div>
+</div>
+
+<div class="field">
+<label>Gaine déjà passée :</label>
+<div class="checkbox-group">
+<label><input type="radio" name="gaine"> Oui</label>
+<label><input type="radio" name="gaine"> Non</label>
+</div>
+</div>
+
+<div class="field">
+<label>Alimentation à l’arrivée :</label>
+<div class="checkbox-group">
+<label><input type="radio" name="alim"> Oui</label>
+<label><input type="radio" name="alim"> Non</label>
+</div>
+</div>
+
+</div>
+
+<label style="margin-top:15px;display:block;font-weight:bold;">Télécommandes supplémentaires :</label>
+<div class="checkbox-group">
+<label><input type="checkbox"> 1</label>
+<label><input type="checkbox"> 2</label>
+<label><input type="checkbox"> 3</label>
+<label><input type="checkbox"> 4</label>
+<label><input type="checkbox"> 5</label>
+</div>
+
+<div class="field" style="margin-top:15px;">
+<label>Observations :</label>
+<textarea rows="4"></textarea>
+</div>
 
 <h2>3. MATÉRIEL À PRÉVOIR</h2>
 
-<div class="grid-form">
-<div class="field">
-<label>Câblage :</label>
-<input type="text">
-</div>
-
-<div class="field">
-<label>Carte SD :</label>
-<div class="checkbox-group">
-<label><input type="checkbox"> 64GB</label>
-<label><input type="checkbox"> 128GB</label>
-</div>
-</div>
-</div>
-
 <table>
 <tr>
-<td><strong>Vis bois :</strong></td>
-<td><input type="radio" name="vis_bois"> Oui <input type="radio" name="vis_bois"> Non</td>
-<td><strong>Vis placo :</strong></td>
-<td><input type="radio" name="vis_placo"> Oui <input type="radio" name="vis_placo"> Non</td>
+<td><strong>Soudure :</strong></td>
+<td>
+<input type="radio" name="soudure"> Oui
+<input type="radio" name="soudure"> Non
+</td>
+
+<td><strong>Gaine :</strong></td>
+<td>
+<input type="radio" name="gaine2"> Oui
+<input type="radio" name="gaine2"> Non
+</td>
 </tr>
 
 <tr>
-<td><strong>Vis tôle :</strong></td>
-<td><input type="radio" name="vis_tole"> Oui <input type="radio" name="vis_tole"> Non</td>
-<td><strong>Vis béton :</strong></td>
-<td><input type="radio" name="vis_beton"> Oui <input type="radio" name="vis_beton"> Non</td>
+<td><strong>Tube carré :</strong></td>
+<td>
+<input type="checkbox"> 50
+<input type="checkbox"> 80
+<input type="checkbox"> 100
+</td>
+
+<td><strong>Alimentation :</strong></td>
+<td>
+<input type="radio" name="alim2"> Oui
+<input type="radio" name="alim2"> Non
+</td>
 </tr>
 </table>
 
 <div class="field" style="margin-top:15px;">
-<label>Date prévisionnelle :</label>
+<label>Date prévisionnelle d’intervention :</label>
 <input type="date" style="width:200px;">
 </div>
 
@@ -244,7 +295,7 @@ const element = document.getElementById('intervention-form');
 
 const opt = {
     margin: [10, 10, 10, 10],
-    filename: 'Fiche_Intervention.pdf',
+    filename: 'Fiche_Intervention_Portail.pdf',
     image: { type: 'jpeg', quality: 0.98 },
     html2canvas: { 
         scale: 2,
